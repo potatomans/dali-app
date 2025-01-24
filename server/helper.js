@@ -2,13 +2,15 @@
 * File defines helper functions interacting with external API
 */
 
-const cheerio = require('cheerio'); // to parse html file
+import * as cheerio from 'cheerio';
+
+// const cheerio = require('cheerio'); // to parse html file
 
 /*
 * Get meme names from apimeme.com
 * Returns a list of all possible meme names
 */
-const getMemes = async () => {
+export const getMemes = async () => {
     const url = "https://apimeme.com/";
     
     try {
@@ -31,7 +33,7 @@ const getMemes = async () => {
 * Gets a joke from v2.jokeapi.dev API
 * Returns a list of 2 items: setup and delivery
 */
-const getJoke = async () => {
+export const getJoke = async () => {
     const url = "https://v2.jokeapi.dev/joke"
     const blacklist = ["nsfw", "religious", "political", "racist", "sexist", "explicit"]; // flags to blacklist when calling API
     const category = "Any";
@@ -49,5 +51,6 @@ const getJoke = async () => {
     }
 }
 
+// TODO: remove after testing
 getMemes();
 getJoke();
