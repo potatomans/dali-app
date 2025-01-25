@@ -2,9 +2,7 @@
 * File defines helper functions interacting with external API
 */
 
-import * as cheerio from 'cheerio';
-
-// const cheerio = require('cheerio'); // to parse html file
+import * as cheerio from 'cheerio'; // to parse html file
 
 /*
 * Get meme names from apimeme.com
@@ -23,9 +21,24 @@ export const getMemes = async () => {
             options.push($(element).attr('value'));
         })
         console.log("options", options);
-        return options;        
-    } catch {
-        throw new Error("error getting meme names");
+        return options;
+    } catch (error) {
+        console.error("error getting meme names", error);
+    }
+}
+
+/*
+* Returns image of a meme with joke. Takes in apimeme.com formatted meme name, a top and bottom caption
+*/
+export const getMemeJoke = async (name, top, bottom) => {
+    const url = `https://apimeme.com/meme?meme=${name}&top=${top}&bottom=${bottom}`
+
+    try {
+        const res = await fetch(url);
+        const imageBuffer = await res.arrayBuffer();
+        return imageBuffer;
+    } catch (error) {
+        console.error("error getting image of meme", error);
     }
 }
 
@@ -46,11 +59,7 @@ export const getJoke = async () => {
         const jokePieces = [data.setup, data.delivery];
         console.log("jokePieces", jokePieces);
         return jokePieces;
-    } catch {
-        throw new Error("unable to get joke");
+    } catch (error) {
+        console.error("unable to get joke", error);
     }
 }
-
-// TODO: remove after testing
-getMemes();
-getJoke();
