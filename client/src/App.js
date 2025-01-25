@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 const PORT = 3001;
 
 const App = () => {
-    const endpoint = `http://localhost:${PORT}/memejoke`;
+    const endpoint = "https://dali-app.onrender.com/memejoke";
     const [imgUrl, setImgUrl] = useState("");
     const [loading, setLoading] = useState(false);
 
