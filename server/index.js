@@ -21,7 +21,7 @@ app.get('/meme', (_, res) => {
         name: meme,
         timestamp: new Date().toISOString(),
     });
-}); // TODO: add endpoint to send over an image instead of just the name. maybe this shld go in a helper
+});
 
 // Get a random joke
 app.get('/joke', async (_, res) => {
