@@ -1,12 +1,10 @@
 import { getJoke, getMemes, getMemeJoke } from './helper.js';
 import express from 'express';
+import cors from 'cors';
 
-// const express = require('express');
-// const helper = require('./helper');
 const app = express();
-// const cors = require('cors'); // Add if linking to frontend
 
-// app.use(cors()); // Add if linking to frontend
+app.use(cors());
 
 const memes = await getMemes(); // Get all possible memes from API
 
@@ -33,6 +31,7 @@ app.get('/joke', async (_, res) => {
 // Returns a random joke pasted on a random meme
 app.get('/memejoke', async (_, res) => {
     const joke = await getJoke(); // array of 2 items
+    console.log("random joke", joke)
     const meme = memes[Math.floor(Math.random() * memes.length)];
     const image = await getMemeJoke(meme, joke[0], joke[1]);
     res.setHeader('Content-Type', 'image/jpeg'); // set image header
@@ -45,7 +44,7 @@ app.get('/test', (req, res) => {
 });
 
 // Start the server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
